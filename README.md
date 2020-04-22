@@ -47,4 +47,4 @@ optional arguments:
 
 ## First time usage example.
 
-## [Documentation](docs/hobolink_tools.md)
+## [Tools Documentation](docs/hobolink_tools.md)
