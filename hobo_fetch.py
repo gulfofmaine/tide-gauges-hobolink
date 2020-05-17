@@ -223,15 +223,9 @@ if __name__ == "__main__":
   status = False
   res_strip_hw = []
 
-  # turns out we don't really need this.
-  qry_name = station_info["query"]
-  if args.query:
-    qry_name = args.query
-  #qry_name = qry_name.replace("neracoos_", "")
-
   out_file = out_dir +  args.station_name + "_" + args.hourly[0] + ".csv"
 
-  if args.verbose: print(out_file, qry_name, args.query )
+  if args.verbose: print(out_file, args.query )
 
   if args.csv_file:
     try:
