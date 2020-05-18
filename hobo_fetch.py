@@ -8,6 +8,7 @@ import argparse
 import Units as Units
 
 from hoboLinkInfo import hoboLinkGauges, hobo_url
+from hobo_file_year import hobo_file_year
 
 ############################################
 def fix_time(time_in, hourly=False):
@@ -184,7 +185,8 @@ if __name__ == "__main__":
   # HamptonBay queries Note: 19 fields.
   #query = 'neracoos_last2hours_hw'  # hoboware CSV
 
-  out_dir = "/home2/data/ONSET/2020/"
+  # HERE
+  out_dir = "/home2/data/ONSET/"
 
   valid_stations = list(sorted(hoboLinkGauges.keys()))
   ap = argparse.ArgumentParser()
@@ -211,8 +213,7 @@ if __name__ == "__main__":
     out_dir = args.out_dir
     if not out_dir.endswith('/'): 
       out_dir += '/'
-      
-
+          
   if args.verbose:
     print("station_name:", args.station_name)
     print("hourly:", args.hourly[0])
@@ -223,7 +224,15 @@ if __name__ == "__main__":
   status = False
   res_strip_hw = []
 
-  out_file = out_dir +  args.station_name + "_" + args.hourly[0] + ".csv"
+  # HERE 
+  #out_file = out_dir +  args.station_name + "_" + args.hourly[0] + ".csv"
+  # confirms year file exists.
+  # None means a brand new file. Still needs work.
+  out_file = hobo_file_year(out_dir, args.station_name, args.hourly[0])
+  if not out_file:
+    print("File: '{0}' does not exists. New year file must be created.".format(out_file), file=sys.stderr)
+    print("Exiting!")
+    exit()
 
   if args.verbose: print(out_file, args.query )
 
@@ -245,7 +254,6 @@ if __name__ == "__main__":
 
   # Open writer
   try:
-    # HERE dt_filter
     w = open(out_file, 'a+')
     #w = open(out_file, 'w', newline="")
     status = True
@@ -258,7 +266,7 @@ if __name__ == "__main__":
 
   # Get the last date in the out_file
   #Hampton Harbor,42.90010,-70.8185,2020-03-10T20:00:00,6.26,5.0016,1.52448768,2.83248768
-  # So first time thru the lines[-1], no lines created yet.
+  # So first time thru the lines[-1], no lines created yet. so no dt_filter
   dt_filter = ''
   w.seek(0)
   lines = w.readlines()
