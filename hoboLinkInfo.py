@@ -4,12 +4,12 @@ from __future__ import  print_function
   Onset Tide Gauge Information
   ===============================
   For all gauges data reported in elevation above MLLW (NAVD88) in feet.
-  MSL  is Mean Sea Level used by the NECOFS water level forecasts.
+  MSL  is Mean Sea Level used by the NECOFS water level forecasts in meters.
   MLLW is Mean Lower Low Water
   https://en.wikipedia.org/wiki/Chart_datum#Mean_Lower_Low_Water
-  Conversion to of data to MSL requires:
+  Conversion of data to MSL requires:
   MSL meters = (MLLW ft. * 0.3048) + GUAGE location correction.
-    msl = mllw_ft * 
+     val_in_feet * 0.3048 = val_in_meters
 
   -  'scituate'
      At this location MSL is 1.491 meters above MLLW

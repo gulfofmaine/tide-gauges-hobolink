@@ -5,7 +5,7 @@
 ## Summary
 
 ##  Info Links
-  - hobolink.com 
+  - https://hobolink.com 
   - https://webservice.hobolink.com/restv2/
 
 ## Requirements 
